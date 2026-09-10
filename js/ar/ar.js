@@ -67,10 +67,12 @@ export async function startAR(viewer) {
     const placement = new THREE.Group();
     scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 2), placement);
 
+    const modelScale = new THREE.Group();
+    modelScale.scale.setScalar(0.001);
     const model = state.currentModel.root.clone();
-    model.scale.multiplyScalar(0.001);
     model.visible = true;
-    placement.add(model);
+    modelScale.add(model);
+    placement.add(modelScale);
 
     const printer = state.printer;
     const volumeGeometry = printer.shape === 'rectangular'
