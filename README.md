@@ -13,17 +13,9 @@ npm run build
 
 Vývojový server Vite je vhodný pro viewer. Service worker a instalační chování ověřujte z produkčního buildu (`npm run build`, následně HTTPS static hosting). Pro vzdálené zařízení je nutný důvěryhodný HTTPS certifikát; `localhost` je jediná běžná výjimka secure-context pravidla.
 
-### GitHub Pages
-
-Projekt je nakonfigurován pro adresu `https://<uživatel>.github.io/3DPrintPreviewAR/`. V nastavení repozitáře zvolte **Settings → Pages → Source: GitHub Actions**. Workflow `.github/workflows/deploy-pages.yml` při každém pushi do `main` sestaví a publikuje adresář `dist`. Vite `base`, relativní `start_url` a scope manifestu i registrace service workeru respektují podadresář projektu, takže assety ani favicon neodkazují chybně na kořen domény.
-
-Po prvním načtení přes HTTPS lze aplikaci instalovat tlačítkem **Nainstalovat aplikaci**. Pokud Chrome ještě neposkytne instalační prompt, tlačítko zobrazí ruční postup. Pro vlastní doménu změňte `base` ve `vite.config.ts` na `/`.
-
 ## PWA a Android
 
 Manifest, automaticky aktualizovaný Workbox service worker, offline cache a maskable ikona vznikají přes `vite-plugin-pwa`. Na Home obrazovce lze vyvolat nativní install prompt. Není-li dostupný, aplikace ukáže postup přes menu Chrome. V již instalovaném standalone režimu se volba skryje.
-
-Ikony a favicon jsou záměrně ve škálovatelném SVG formátu. Repozitář proto neobsahuje binární PNG/ICO soubory a lze jej bez omezení odeslat přes patch-based pull request nástroje.
 
 WebXR režim vyžaduje Android Chrome, ARCore-kompatibilní telefon, HTTPS a povolení kamery. Pomocí `immersive-ar` a hit-testu najde vodorovnou plochu; klepnutí položí uzamčený model ve vztahu **1 mm = 0,001 m** spolu s wireframe tiskovým prostorem. Nepodporovaný prohlížeč bezpečně zůstane ve 3D vieweru. AR se musí finálně ověřit na fyzickém zařízení.
 
