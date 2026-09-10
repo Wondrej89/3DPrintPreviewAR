@@ -123,16 +123,12 @@ export async function startAR(viewer) {
           reticle.visible = true;
           placeButton.disabled = false;
           if (!placement.visible) status.textContent = 'Povrch nalezen. Klepněte do obrazu nebo na „Umístit model“.';
-        } else {
-          validPose = null;
+        } else if (!validPose) {
           reticle.visible = false;
-          placeButton.disabled = true;
           if (!placement.visible) status.textContent = 'Nalezený povrch není vodorovný. Miřte na podlahu nebo stůl.';
         }
-      } else {
-        validPose = null;
+      } else if (!validPose) {
         reticle.visible = false;
-        placeButton.disabled = true;
         if (!placement.visible) status.textContent = 'Pomalu pohybujte telefonem a namiřte kameru na vodorovný povrch.';
       }
       renderer.render(scene, camera);
