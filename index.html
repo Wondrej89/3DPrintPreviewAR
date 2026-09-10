@@ -18,6 +18,10 @@
     <span id="notice-message"></span>
     <button id="notice-close" type="button" aria-label="Zavřít upozornění">×</button>
   </aside>
+  <aside id="update-banner" hidden role="status" aria-live="polite">
+    <span>Je dostupná nová verze aplikace</span>
+    <button id="update-app" type="button">Aktualizovat</button>
+  </aside>
   <div id="loading" class="loading" hidden role="status" aria-live="polite" aria-label="Načítání modelu">
     <span class="spinner" aria-hidden="true"></span>
     <strong id="loading-message">Načítám model…</strong>
@@ -43,6 +47,7 @@
       <ul id="recents"></ul>
     </section>
     <footer>
+      <div class="app-info"><b>PrintScope AR</b><small id="app-version">v0.3.7</small></div>
       <button id="share" class="share">↗ <span>Sdílet aplikaci</span></button>
     </footer>
   </main>
