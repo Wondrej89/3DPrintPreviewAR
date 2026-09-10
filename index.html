@@ -1,1 +1,49 @@
-<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#121820"><title>PrintScope AR</title><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icons/icon-192.svg"><link rel="stylesheet" href="./styles.css"><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script></head><body><aside id="notice" hidden role="alert"></aside><main id="home"><header><span class="logo">▱</span><h1>PrintScope AR</h1><p>Lokální kontrola modelu před 3D tiskem</p></header><section class="card open"><h2>Otevřít model</h2><div><select id="unit" aria-label="Jednotka"><option>mm</option><option>cm</option><option>inch</option></select><label class="primary">Vybrat STL, OBJ nebo 3MF<input id="file" type="file" accept=".stl,.obj,.3mf" hidden></label></div><small>STL a OBJ: zvolte vstupní jednotku. 3MF používá jednotku souboru.</small></section><button id="install" class="install">＋ Nainstalovat aplikaci</button><section><h2>Poslední modely</h2><ul id="recents"></ul></section></main><main id="viewer" hidden><div class="top"><button id="back">‹</button><div><b id="title"></b><span id="dimensions"></span><span id="fit"></span></div></div><canvas id="canvas"></canvas><div id="busy" hidden>Analyzuji geometrii…</div><div id="legend" hidden><i></i> safe <i></i> warning <i></i> critical</div><p id="mesh"></p><div class="controls"><button id="place">Place on face</button><button id="reset">Reset</button><button id="rot-x">X +90°</button><button id="rot-y">Y +90°</button><button id="rot-z">Z +90°</button></div><nav><button id="analysis">◒<small>Analysis</small></button><button id="ar">⌖<small>AR · 1:1</small></button><label>▣<small>Printer</small><select id="printer"></select></label><label>⬡<small>Filament</small><select id="material"></select></label></nav></main><script type="module" src="./js/app.js"></script></body></html>
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#121820">
+  <title>PrintScope AR</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body>
+  <aside id="notice" hidden role="alert"></aside>
+  <main id="home">
+    <header>
+      <span class="logo" aria-hidden="true">▱</span>
+      <h1>PrintScope AR</h1>
+      <p>Lokální kontrola modelu před 3D tiskem</p>
+    </header>
+    <section class="card open">
+      <h2>Otevřít model</h2>
+      <div>
+        <select id="unit" aria-label="Jednotka"><option>mm</option><option>cm</option><option>inch</option></select>
+        <label class="primary">Vybrat STL, OBJ nebo 3MF<input id="file" type="file" accept=".stl,.obj,.3mf" hidden></label>
+      </div>
+      <small>STL a OBJ: zvolte vstupní jednotku. 3MF používá jednotku souboru.</small>
+    </section>
+    <button id="install" class="install">＋ Nainstalovat aplikaci</button>
+    <section class="recents-section">
+      <h2>Poslední modely</h2>
+      <ul id="recents"></ul>
+    </section>
+    <footer>
+      <button id="share" class="share">↗ <span>Sdílet aplikaci</span></button>
+    </footer>
+  </main>
+  <main id="viewer" hidden>
+    <div class="top"><button id="back">‹</button><div><b id="title"></b><span id="dimensions"></span><span id="fit"></span></div></div>
+    <canvas id="canvas"></canvas>
+    <div id="busy" hidden>Analyzuji geometrii…</div>
+    <div id="legend" hidden><i></i> safe <i></i> warning <i></i> critical</div>
+    <p id="mesh"></p>
+    <div class="controls"><button id="place">Place on face</button><button id="reset">Reset</button><button id="rot-x">X +90°</button><button id="rot-y">Y +90°</button><button id="rot-z">Z +90°</button></div>
+    <nav><button id="analysis">◒<small>Analysis</small></button><button id="ar">⌖<small>AR · 1:1</small></button><label>▣<small>Printer</small><select id="printer"></select></label><label>⬡<small>Filament</small><select id="material"></select></label></nav>
+  </main>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
