@@ -1,0 +1,1 @@
+{"name":"@vitejs/plugin-react","version":"4.3.4","type":"module","exports":"./index.js","peerDependencies":{"vite":"^6.0.0"}}
