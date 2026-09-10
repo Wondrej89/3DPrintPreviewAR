@@ -35,4 +35,4 @@ Bridge region heuristic, BVH thin-wall analýza, disconnected shells/inconsisten
 
 ## PWA
 
-`manifest.webmanifest` používá relativní `start_url`/`scope`. Verzovaný `sw.js` přednačte app shell, všechny moduly, Three.js závislosti a ikony; aktivace odstraní staré cache. Modely zůstávají v IndexedDB. Instalace používá `beforeinstallprompt`, standalone detekci a fallback instrukci pro Chrome.
+`manifest.webmanifest` používá relativní `start_url`/`scope`. Verzovaný `sw.js` přednačte app shell, všechny moduly, Three.js závislosti a ikony. Vlastní HTML/CSS/JS používají network-first strategii: online se vždy stáhne a uloží aktuální odpověď, offline se použije poslední cache. Aktivace odstraní pouze staré aplikační cache; modely a nastavení v nezávislé IndexedDB zůstávají zachované. Registrace obchází HTTP cache Service Workeru, při startu výslovně kontroluje aktualizaci a novou verzi na domovské obrazovce načte automaticky. V otevřeném 3D Vieweru místo toho nabídne bezpečné ruční načtení, aby nepřerušila práci s modelem.
