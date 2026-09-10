@@ -1,0 +1,1 @@
+import {validateMesh} from '../analysis/core';self.onmessage=(e:MessageEvent<{id:string,positions:Float32Array}>)=>{const {id,positions}=e.data;(self as unknown as Worker).postMessage({id,result:validateMesh(positions)})};
