@@ -1,0 +1,1 @@
+{"name":"vite-plugin-pwa","version":"0.21.1","type":"module","exports":"./index.js","peerDependencies":{"vite":"^6.0.0"}}
