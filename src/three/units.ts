@@ -1,0 +1,1 @@
+import type {ModelUnit} from '../types'; export const unitScale=(u:ModelUnit)=>u==='mm'?1:u==='cm'?10:25.4; export const toMillimeters=(v:number,u:ModelUnit)=>v*unitScale(u); export const mmToMeters=(v:number)=>v*.001;

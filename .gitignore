@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.test/
+*.tsbuildinfo
+.DS_Store
+# Generated from scripts/generate-pwa-icons.mjs before dev/build.
+public/icons/
