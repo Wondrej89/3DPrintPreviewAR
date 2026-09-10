@@ -16,7 +16,7 @@ Nastavte **Settings → Pages → Deploy from a branch → main → /(root)**. P
 
 ## Architektura a importy
 
-`index.html` načítá `./js/app.js` jako nativní ES Module a import map mapuje `three` a `three/addons/` na lokální `vendor/three/`. Three.js a potřebné loadery/controls jsou verzované v repozitáři; za běhu se nepoužívá CDN. `js/state.js` je jediný zdroj transformace pro viewer, fit, persistence i AR.
+`index.html` načítá `./js/app.js` jako nativní ES Module a import map mapuje `three` a `three/addons/` na pevně verzované Three.js 0.160.0 na jsDelivr CDN. Service Worker tyto soubory při instalaci uloží pro další offline spuštění. `js/state.js` je jediný zdroj transformace pro viewer, fit, persistence i AR.
 
 - `js/model`: STL/OBJ/3MF import, jednotky a orientace
 - `js/viewer`: jedna persistentní WebGL scéna a build plate
@@ -35,4 +35,4 @@ Bridge region heuristic, BVH thin-wall analýza, disconnected shells/inconsisten
 
 ## PWA
 
-`manifest.webmanifest` používá relativní `start_url`/`scope`. Verzovaný `sw.js` přednačte app shell, všechny moduly, vendored závislosti a ikony; aktivace odstraní staré cache. Modely zůstávají v IndexedDB. Instalace používá `beforeinstallprompt`, standalone detekci a fallback instrukci pro Chrome.
+`manifest.webmanifest` používá relativní `start_url`/`scope`. Verzovaný `sw.js` přednačte app shell, všechny moduly, Three.js závislosti a ikony; aktivace odstraní staré cache. Modely zůstávají v IndexedDB. Instalace používá `beforeinstallprompt`, standalone detekci a fallback instrukci pro Chrome.
