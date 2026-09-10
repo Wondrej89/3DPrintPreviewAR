@@ -15,6 +15,11 @@
     <span id="notice-message"></span>
     <button id="notice-close" type="button" aria-label="Zavřít upozornění">×</button>
   </aside>
+  <div id="loading" class="loading" hidden role="status" aria-live="polite" aria-label="Načítání modelu">
+    <span class="spinner" aria-hidden="true"></span>
+    <strong id="loading-message">Načítám model…</strong>
+    <small>U větších souborů to může chvíli trvat.</small>
+  </div>
   <main id="home">
     <header>
       <span class="logo" aria-hidden="true">▱</span>
@@ -29,7 +34,7 @@
       </div>
       <small>STL a OBJ: zvolte vstupní jednotku. 3MF používá jednotku souboru.</small>
     </section>
-    <button id="install" class="install">＋ Nainstalovat aplikaci</button>
+    <button id="install" class="install" hidden>＋ Nainstalovat aplikaci</button>
     <section class="recents-section">
       <h2>Poslední modely</h2>
       <ul id="recents"></ul>
@@ -41,7 +46,6 @@
   <main id="viewer" hidden>
     <div class="top"><button id="back" aria-label="Zpět na výběr modelu">‹</button><div><b id="title"></b><span id="dimensions"></span><span id="fit"></span></div></div>
     <canvas id="canvas"></canvas>
-    <div id="busy" hidden>Analyzuji geometrii…</div>
     <div id="legend" hidden><i></i> bezpečné <i></i> varování <i></i> kritické</div>
     <p id="mesh"></p>
     <div class="controls" aria-label="Natočení modelu"><button id="place">Položit na plochu</button><button id="reset">Obnovit polohu</button><button id="rot-x">Otočit X +90°</button><button id="rot-y">Otočit Y +90°</button><button id="rot-z">Otočit Z +90°</button></div>

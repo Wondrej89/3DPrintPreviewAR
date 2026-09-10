@@ -64,12 +64,18 @@ nav select { width: 100%; max-width: none; min-height: 36px; padding: 4px 8px; c
 #notice-message { flex: 1; min-width: 0; }
 #notice-close { flex: 0 0 44px; width: 44px; min-height: 44px; padding: 0; background: transparent; font-size: 1.7rem; line-height: 1; cursor: pointer; }
 #notice-close:hover, #notice-close:focus-visible { background: #ffffff1c; outline: 2px solid #fff; }
-#busy, #legend { position: absolute; left: 50%; transform: translateX(-50%); padding: 8px; border-radius: 8px; background: #19222ddd; }
-#busy { top: 45%; }
+#legend { position: absolute; left: 50%; transform: translateX(-50%); padding: 8px; border-radius: 8px; background: #19222ddd; }
 #legend { top: 60%; }
 #legend i { display: inline-block; width: 15px; height: 10px; background: #21bf88; }
 #legend i:nth-of-type(2) { background: #ffb70d; }
 #legend i:nth-of-type(3) { background: #e92925; }
+.loading { position: fixed; z-index: 30; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px; background: #0f141be8; text-align: center; }
+.loading[hidden] { display: none; }
+.loading strong { font-size: 1.15rem; }
+.loading small { color: #c0cad3; }
+.spinner { width: 52px; height: 52px; border: 5px solid #52606d; border-top-color: #55e7b4; border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 1.8s; } }
 
 @media (max-width: 520px) {
   :root { font-size: 17px; }
