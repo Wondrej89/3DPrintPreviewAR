@@ -1,0 +1,1 @@
+export const materials=[['pla','PLA',1],['petg','PETG',1.08],['abs','ABS',1.18],['asa','ASA',1.15],['tpu','TPU',1.3],['pa','PA / Nylon',1.22],['pc','PC',1.25]].map(([id,name,overhangSeverityFactor])=>({id,name,overhangSeverityFactor,bridgeSeverityFactor:overhangSeverityFactor}));

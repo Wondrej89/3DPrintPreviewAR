@@ -1,0 +1,4 @@
+import * as THREE from'three';import{state,update}from'../state.js';
+export function applyTransform(root){root.quaternion.fromArray(state.transform.quaternion);root.updateMatrixWorld(true);const b=new THREE.Box3().setFromObject(root);root.position.set(0,0,-b.min.z);update({transform:{quaternion:root.quaternion.toArray(),position:root.position.toArray()}})}
+export function rotate90(root,axis){const q=new THREE.Quaternion().setFromAxisAngle(({x:new THREE.Vector3(1,0,0),y:new THREE.Vector3(0,1,0),z:new THREE.Vector3(0,0,1)})[axis],Math.PI/2);root.quaternion.premultiply(q);applyTransform(root)}
+export function placeNormal(root,normal){const world=normal.clone().transformDirection(root.matrixWorld);root.quaternion.premultiply(new THREE.Quaternion().setFromUnitVectors(world.normalize(),new THREE.Vector3(0,0,-1)));applyTransform(root)}export function resetOrientation(root){root.quaternion.identity();applyTransform(root)}

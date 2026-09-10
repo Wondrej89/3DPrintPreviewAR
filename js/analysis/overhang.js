@@ -1,0 +1,2 @@
+import * as THREE from'three';export function overhangRisk(normalZ,factor=1){if(normalZ>=0)return 0;return Math.min(1,Math.max(0,-normalZ)*factor)}export const overhangAngle=nz=>Math.acos(Math.max(-1,Math.min(1,nz)))*180/Math.PI;
+export function addOverhangAttribute(root,factor){root.traverse(o=>{const g=o.geometry;if(!g)return;const n=g.attributes.normal,r=new Float32Array(n.count);for(let i=0;i<n.count;i++)r[i]=overhangRisk(n.getZ(i),factor);g.setAttribute('risk',new THREE.Float32BufferAttribute(r,1))})}
