@@ -1,8 +1,1 @@
-/// <reference lib="webworker" />
-import { validateMesh } from '../analysis/core';
-
-declare const self: DedicatedWorkerGlobalScope;
-self.onmessage = (event: MessageEvent<{ positions: Float32Array }>) => {
-  self.postMessage({ result: validateMesh(event.data.positions) });
-};
-export {};
+import {validateMesh} from '../analysis/core';self.onmessage=(e:MessageEvent<{id:string,positions:Float32Array}>)=>{const {id,positions}=e.data;(self as unknown as Worker).postMessage({id,result:validateMesh(positions)})};
