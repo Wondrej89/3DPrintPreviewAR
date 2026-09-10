@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="PrintScope AR">
+  <rect width="512" height="512" fill="#0f141b"/>
+  <!-- Artwork stays inside the maskable safe zone. -->
+  <path d="m164 174 92-46 92 46v121l-92 90-92-90Zm19 17v91l64 64v-86Zm82 69v86l64-64v-91Zm-74-78 65 49 65-49-65-32Z" fill="#55e7b4"/>
+  <path d="M187 297h138" stroke="#edf3f7" stroke-width="15" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192" role="img" aria-label="PrintScope AR">
+  <rect width="192" height="192" rx="36" fill="#0f141b"/>
+  <path d="M45 50 96 25l51 25v67l-51 50-51-50Zm10 9v52l36 36V99Zm46 40v48l36-36V59Zm-41-43 36 27 36-27-36-18Z" fill="#55e7b4"/>
+  <path d="M58 118h76" stroke="#edf3f7" stroke-width="8" stroke-linecap="round"/>
+</svg>

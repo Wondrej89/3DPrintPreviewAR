@@ -1,2 +1,0 @@
-import type {MaterialProfile} from '../types';
-export const MATERIALS:MaterialProfile[]=[['pla','PLA',1,1],['petg','PETG',1.08,1.15],['abs','ABS',1.12,1.2],['asa','ASA',1.1,1.18],['tpu','TPU',1.25,1.35],['pa','PA / Nylon',1.2,1.28],['pc','PC',1.18,1.25]].map(([id,name,o,b])=>({id:id as string,name:name as string,overhangSeverityFactor:o as number,bridgeSeverityFactor:b as number,notes:'Orientační faktor; výsledek ovlivňuje chlazení, rychlost a výška vrstvy.'}));
