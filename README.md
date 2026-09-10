@@ -1,51 +1,44 @@
 # PrintScope AR
 
-Mobilně orientovaná PWA pro lokální prohlížení a předtiskovou geometrickou kontrolu STL, OBJ a 3MF. Nejde o slicer: aplikace negeneruje vrstvy, supporty ani G-code a soubory neposílá na server.
+Mobilně orientovaná PWA pro lokální prohlížení a předtiskovou geometrickou kontrolu STL, OBJ a 3MF. Nejde o slicer: aplikace negeneruje vrstvy, supporty ani G-code a soubory nikdy neposílá na server.
 
-## Local development
+## Spuštění a build
 
 ```bash
-npm ci
+npm install
 npm run dev
-```
-
-## Production build
-
-```bash
+npm test
 npm run build
-npm run preview
 ```
 
-Produkční provoz a WebXR vyžadují HTTPS (`localhost` je vývojová výjimka secure-context pravidla).
+Vývojový server Vite je vhodný pro viewer. Service worker a instalační chování ověřujte z produkčního buildu (`npm run build`, následně HTTPS static hosting). Pro vzdálené zařízení je nutný důvěryhodný HTTPS certifikát; `localhost` je jediná běžná výjimka secure-context pravidla.
 
-## GitHub Pages deployment
+## PWA a Android
 
-- URL: `https://wondrej89.github.io/3DPrintPreviewAR/`
-- Vite base: `/3DPrintPreviewAR/`
-- V nastavení repozitáře zvolte **Settings → Pages → Source = GitHub Actions**.
-- Workflow `.github/workflows/deploy-pages.yml` spouští `npm ci`, testy a produkční build a publikuje výhradně artifact `dist/`, nikoli zdrojový root.
+Manifest, automaticky aktualizovaný Workbox service worker, offline cache a maskable ikona vznikají přes `vite-plugin-pwa`. Na Home obrazovce lze vyvolat nativní install prompt. Není-li dostupný, aplikace ukáže postup přes menu Chrome. V již instalovaném standalone režimu se volba skryje.
 
-Manifest, service worker, offline cache a instalační ikony respektují project-page base. Manifest otevírá `/3DPrintPreviewAR/` ve `standalone` režimu. Chrome používá raster ikony 192 × 192, 512 × 512 a samostatnou maskable 512 × 512. Na Home lze vyvolat nativní install prompt; není-li dostupný, aplikace ukáže ruční postup.
-
-Repozitář samotný neobsahuje binární soubory. Požadované PNG ikony vytváří textový skript `scripts/generate-pwa-icons.mjs` automaticky před `npm run dev` a `npm run build`; do GitHub Pages artifactu `dist/` se tedy zahrnou, ale neblokují nástroje pro vytvoření pull requestu, které binární diff nepodporují.
-
-## Android a WebXR
-
-WebXR vyžaduje Android Chrome, ARCore-kompatibilní telefon, HTTPS a povolení kamery. `immersive-ar` hit-test umístí model v aktuálně uložené orientaci v poměru **1 mm = 0,001 m**. Nepodporovaný prohlížeč bezpečně zůstane ve 3D vieweru. Finální hit-test a install prompt je nutné ověřit na fyzickém zařízení.
+WebXR režim vyžaduje Android Chrome, ARCore-kompatibilní telefon, HTTPS a povolení kamery. Pomocí `immersive-ar` a hit-testu najde vodorovnou plochu; klepnutí položí uzamčený model ve vztahu **1 mm = 0,001 m** spolu s wireframe tiskovým prostorem. Nepodporovaný prohlížeč bezpečně zůstane ve 3D vieweru. AR se musí finálně ověřit na fyzickém zařízení.
 
 ## Architektura
 
-- `src/pages`, `src/components` – mobile-first Home, viewer a sheets.
-- `src/three` – STL/OBJ/3MF loadery a převody do interních mm.
-- `src/analysis`, `src/shaders`, `src/workers` – geometrické metriky, overhang shader a worker validace.
-- `src/storage` – IndexedDB Blob/metadata historie, persistentní transformace a settings.
-- `src/ar` – WebXR hit-test, 1:1 měřítko a tiskový prostor.
-- `src/data` – deklarativní profily Prusa FFF a materiálové heuristiky.
+- `src/pages`, `src/components` – mobile-first Home, viewer, sheets a instalační UI.
+- `src/three` – izolované loadery Three.js, sjednocení meshů a převody na interní mm.
+- `src/analysis`, `src/shaders`, `src/workers` – geometrické metriky, shader heatmapy a worker vstup.
+- `src/storage` – IndexedDB Blob/metadata historie s LRU limitem 10.
+- `src/ar` – WebXR hit-test, skutečné měřítko a tiskový prostor.
+- `src/data` – aktualizovatelné profily Prusa FFF a materiálové heuristiky mimo UI.
 
-## Aktuální analytické možnosti a omezení
+## Analytické heuristiky
 
-Mesh validator ve workeru skutečně reportuje boundary edges, non-manifold edges a degenerované trojúhelníky. Převisová shader heatmapa používá world-space normálu vůči build direction +Z: svislé a vzhůru orientované plochy jsou bezpečné, riziko roste pouze směrem dolů. Vybraný materiál mění práh této jasně označené heuristiky.
+Mesh validator třídí boundary, non-manifold a degenerované hrany; poškozený model zůstává zobrazitelný. Převisová shader heatmapa používá normálu vůči build direction +Z. Bridge a materiálové skóre je pouze geometrický odhad, protože bez vrstev nelze přesně určit podporu. Thin-wall režim vizualizuje lokální riziko relativně k aktivní trysce; produkční přesnost u komplikovaných/non-watertight meshů není zaručena. Kontakt s podložkou používá numerické okolí Z=0. Doporučení orientace je záměrně prezentováno jako heuristika, nikoli optimum.
 
-Bridge detection a BVH měření tenkých stěn zatím nejsou implementované a jsou v produkčním UI explicitně deaktivované. Aplikace proto nezobrazuje falešné počty mostů ani hodnoty minimální tloušťky. Self-intersections, disconnected shells a inconsistent normals nejsou v současném validatoru reportované. Vlastní tiskárny jsou rovněž označené jako nedostupné, dokud nebude dokončena jejich persistence a validace.
+## Známá omezení
 
-Novou vestavěnou tiskárnu přidejte do `src/data/printers.ts` s explicitním rectangular/circular build volume. Materiál přidejte do `src/data/materials.ts` s dokumentovaným faktorem převisové heuristiky.
+- 3MF načítá Three.js loader včetně assemblies; některá vendor-specific rozšíření nemusí být podporována.
+- OBJ externí MTL a textury nejsou potřeba pro analýzu a nenačítají se.
+- Self-intersection a bridge detekce jsou u velmi velkých modelů aproximace. Skutečný tisk závisí i na chlazení, rychlosti a vrstvě.
+- WebXR nemá plnohodnotný desktopový emulátor; finální hit-test a instalovatelnost vyžadují Android hardware.
+
+## Rozšíření profilů
+
+Novou tiskárnu přidejte deklarativně do `src/data/printers.ts` s explicitním rectangular/circular build volume; zejména INDX objem nikdy neodvozujte. Materiál přidejte do `src/data/materials.ts` s pojmenovanými faktory převisů a mostů. UI tyto soubory načítá automaticky bez hardcoded seznamů.
