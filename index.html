@@ -11,7 +11,10 @@
   <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 </head>
 <body>
-  <aside id="notice" hidden role="alert"></aside>
+  <aside id="notice" hidden role="alert">
+    <span id="notice-message"></span>
+    <button id="notice-close" type="button" aria-label="Zavřít upozornění">×</button>
+  </aside>
   <main id="home">
     <header>
       <span class="logo" aria-hidden="true">▱</span>
@@ -36,13 +39,18 @@
     </footer>
   </main>
   <main id="viewer" hidden>
-    <div class="top"><button id="back">‹</button><div><b id="title"></b><span id="dimensions"></span><span id="fit"></span></div></div>
+    <div class="top"><button id="back" aria-label="Zpět na výběr modelu">‹</button><div><b id="title"></b><span id="dimensions"></span><span id="fit"></span></div></div>
     <canvas id="canvas"></canvas>
     <div id="busy" hidden>Analyzuji geometrii…</div>
-    <div id="legend" hidden><i></i> safe <i></i> warning <i></i> critical</div>
+    <div id="legend" hidden><i></i> bezpečné <i></i> varování <i></i> kritické</div>
     <p id="mesh"></p>
-    <div class="controls"><button id="place">Place on face</button><button id="reset">Reset</button><button id="rot-x">X +90°</button><button id="rot-y">Y +90°</button><button id="rot-z">Z +90°</button></div>
-    <nav><button id="analysis">◒<small>Analysis</small></button><button id="ar">⌖<small>AR · 1:1</small></button><label>▣<small>Printer</small><select id="printer"></select></label><label>⬡<small>Filament</small><select id="material"></select></label></nav>
+    <div class="controls" aria-label="Natočení modelu"><button id="place">Položit na plochu</button><button id="reset">Obnovit polohu</button><button id="rot-x">Otočit X +90°</button><button id="rot-y">Otočit Y +90°</button><button id="rot-z">Otočit Z +90°</button></div>
+    <nav aria-label="Nástroje náhledu">
+      <button id="analysis" aria-pressed="false"><span class="nav-icon" aria-hidden="true">◒</span><span class="nav-copy"><b>Analýza převisů</b><small>Zobrazit riziková místa</small></span></button>
+      <button id="ar"><span class="nav-icon" aria-hidden="true">⌖</span><span class="nav-copy"><b>Zobrazit v AR</b><small>Skutečná velikost 1 : 1</small></span></button>
+      <label><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-copy"><b>Tiskárna</b><small>Vyberte tiskovou plochu</small><select id="printer" aria-label="Vybrat tiskárnu"></select></span></label>
+      <label><span class="nav-icon" aria-hidden="true">⬡</span><span class="nav-copy"><b>Filament</b><small>Vyberte materiál</small><select id="material" aria-label="Vybrat filament"></select></span></label>
+    </nav>
   </main>
   <script type="module" src="./js/app.js"></script>
 </body>
