@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'printscope-';
-const CACHE = `${CACHE_PREFIX}v0.3.7`;
+const CACHE = `${CACHE_PREFIX}v0.3.8`;
 const FILES = [
   './',
   './index.html',
