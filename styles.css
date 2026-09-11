@@ -79,6 +79,7 @@ nav select { width: 100%; max-width: none; min-height: 48px; padding: 8px; curso
 #legend i { display: inline-block; width: 15px; height: 10px; background: #21bf88; }
 #legend i:nth-of-type(2) { background: #ffb70d; }
 #legend i:nth-of-type(3) { background: #e92925; }
+#legend i:nth-of-type(4) { background: #1f7aff; }
 .loading { position: fixed; z-index: 30; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px; background: #0f141be8; text-align: center; }
 .loading[hidden] { display: none; }
 .loading strong { font-size: 1.15rem; }
