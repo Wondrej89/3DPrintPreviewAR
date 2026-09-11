@@ -16,6 +16,7 @@ const FILES = [
   'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/3MFLoader.js',
   'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/fflate.module.js',
   './js/app.js',
+  './js/pwa/install.js',
   './js/state.js',
   './js/model/load-model.js',
   './js/model/units.js',
