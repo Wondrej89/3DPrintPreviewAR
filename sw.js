@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'printscope-';
-const CACHE = `${CACHE_PREFIX}v0.3.7`;
+const CACHE = `${CACHE_PREFIX}v0.3.8`;
 const FILES = [
   './',
   './index.html',
@@ -16,6 +16,7 @@ const FILES = [
   'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/3MFLoader.js',
   'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/fflate.module.js',
   './js/app.js',
+  './js/pwa/install.js',
   './js/state.js',
   './js/model/load-model.js',
   './js/model/units.js',
